@@ -37,17 +37,26 @@ export const Default = () => ({
     '<VInput ref="input" v-model="value" :type="type" :label="label" :disabled="disabled" :readonly="readonly"/>',
 });
 
-export const test = () => ({
+export const WithFocusToggleButton = () => ({
   components: { VInput },
   props: {
-    value: {
-      default: text('value', ''),
+    label: {
+      default: text('label', ''),
+    },
+    disabled: {
+      default: boolean('disabled', false),
+    },
+    readonly: {
+      default: boolean('readonly', false),
+    },
+    type: {
+      default: text('type', 'text'),
     },
   },
   data() {
     return {
       hasFocus: false,
-      initialValue: '',
+      value: '',
     };
   },
   methods: {
@@ -70,7 +79,7 @@ export const test = () => ({
   template:
     '<div>' +
     '<button @click="toggle">toggle focus on input</button><br>' +
-    '<VInput ref="input" v-model="initialValue"/>' +
+    '<VInput ref="input" v-model="value" :type="type" :label="label" :disabled="disabled" :readonly="readonly"/>' +
     '</div>',
 });
 
@@ -94,11 +103,6 @@ export const WithLabel = () => ({
     return {
       value: '',
     };
-  },
-  methods: {
-    log(event) {
-      console.log(event);
-    },
   },
   template:
     '<VInput v-model="value" :type="type" :label="label" :disabled="disabled" :readonly="readonly"/>',
